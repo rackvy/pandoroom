@@ -1,0 +1,22 @@
+<header>
+    <div class="nav content">
+        <a class="nav-link" href="{{ path('app_main') }}">
+            <img class="logo" src="{{ asset('assets/img/logo.svg') }}" alt="">
+        </a>
+        <div id="try-and-register-modal"></div>
+        <div class="menu {% if app.user %}menu-logged {% endif %}">
+            {% include 'partials/header/top_navigation.html.twig' %}
+            {% if is_granted('ROLE_BUYER') %}
+                <div id="login"></div>
+            {% endif %}
+            {% if app.user %}
+            {% else %}
+                <div id="login"></div>
+            {% endif %}
+            <div class="menus">
+                <img src="{{ asset('assets/img/burger.svg') }}" class="burger lazyLoad isLoaded" style="font-size:30px;cursor:pointer" onclick="openNav()"; alt="">
+            </div>
+        </div>
+    </div>
+    {% include 'partials/header/sidebar_navigation.html.twig' %}
+</header>

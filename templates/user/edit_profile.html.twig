@@ -1,0 +1,200 @@
+{% extends 'layouts/lk.html.twig' %}
+{% block title %}Редактировать профиль - Онлайн-сервис по подбору домашнего персонала{% endblock %}
+{% block body %}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
+
+    {% include 'partials/header.html.twig' %}
+    <div>
+        <div class="main_account content">
+            <div  class="bread">
+                <a  href="/" class="nuxt-link-active">Главная</a>
+                <a href="{{ path('app_lk') }}">/ {{ 'Personal area'|trans }}</a>
+                <a>/ Редактировать профиль</a>
+            </div>
+            <div class="mobfile mobs">
+                <p>Мой профиль</p>
+            </div>
+            <div class="large_account fon">
+                <div class="in_account">
+                    {% include 'partials/_message.html.twig' %}
+
+                    <h2>Редактировать профиль
+                        {% if is_granted('ROLE_EMPLOYEE') %}
+                            работодателя
+                        {% elseif is_granted('ROLE_CUSTOMER') %}
+                            работника
+                        {% elseif is_granted('ROLE_BUYER') %}
+                        покупателя
+                        {% else %}
+                        {% endif %}
+                    </h2>
+
+                {{ form_start(form, {'attr' : {'class': 'form-std form-std-custom', 'autocomplete': 'off'}} ) }}
+                    <div class="_form-group grig-group">
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.plainPassword, { label: 'Пароль'}) }}
+                        {{ form_row(form.phone) }}
+                        {{ form_row(form.firstName) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.age, { label: 'Дата рождения'}) }}
+                    </div>
+                    <script>
+                        document.querySelector("#edit_profile_form_age").type = 'date';
+                    </script>
+                    <div class="form-group grig-group">
+                        <div>
+                            <label for="edit_profile_form_city" class="required">Ваш город</label>
+                            <input type="text" id="edit_profile_form_city" name="edit_profile_form[city]" required="required"
+                                   placeholder="Ваш город" class="form-control" value="{{ user.city }}">
+                        </div>
+                        <div class="js-input-adress-formating" style="position: relative;">
+                        {{ form_row(form.address) }}
+                            <ul class="autocomplete js-autocomplete" style="display:none;"></ul>
+
+                        </div>
+                        <div class="input-select-multiple">
+                        {{ form_row(form.citizen) }}
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('.input-select-multiple select').select2({});
+                        $( "#edit_profile_form_city" ).autocomplete({
+                            source: function( request, response ) {
+                                $.ajax({
+                                    url: "{{ path('api_cities') }}",
+                                    dataType: "json",
+                                    type: "POST",
+                                    data: {
+                                        maxRows: 15,
+                                        name: request.term
+                                    },
+                                    success: function( data ) {
+                                        response( $.map( data, function( item ) {
+                                            return {
+                                                label: item.name,
+                                                lat: item.lat,
+                                                lng: item.lng,
+                                                district: item.district
+                                            }
+                                        }));
+                                    }
+                                });
+                            },
+                            minlength: 2
+                        });
+                    </script>
+
+
+                    <div class="form-group grig-group" style="margin-top: 20px">
+                        {{ form_row(form.about) }}
+                        <div class="round_account">
+                            {% if user.avatar %}
+                                <img id="avatar" src="{{ asset('uploads/files/' ~ user.avatar) }}" class="lazyLoad isLoaded" alt=""/>
+                            {% else %}
+                                <img id="avatar" src="{{ asset('assets/img/photo_acount.jpg') }}" width="200" alt="">
+                            {% endif %}
+                            <div class="">
+                                <div class="upload-image-message"></div>
+                                <p>Аватар пользователя</p>
+                                <div class="upload_file">
+                                    {{ form_widget(form.avatar) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .round_account{
+                            align-items: flex-start;
+                            justify-content: start;
+                            max-width: 100%;
+                            border: none;
+                        }
+                    </style>
+
+                    <div class="btn_try btn_try_custom">
+                        <button type="submit" class="btn btn-success">Обновить профиль</button>
+                    </div>
+                {{ form_end(form) }}
+
+                    <div id="imageModal" class="login modal-vue _hidden" style="visibility: hidden">
+                        <div class="overlay"></div>
+                        <!-- Modal content -->
+                        <div class="modal">
+                            <div class="modal-title" style="margin-top: 30px;">
+                                <h2>{{ 'Upload image'|trans }}</h2>
+                                <button class="close"><img src="{{ asset('assets/img/krest.svg') }}" alt=""></button>
+                            </div>
+                            <div class="modal-content">
+                                <div id="image_avatar"></div>
+
+                                <div class="btn_try" style="text-align: center">
+                                    <button class="btn btn-success crop_image">{{ 'Crop & Upload Image'|trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% include 'partials/scripts/_image_crop.html.twig' %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            $("#edit_profile_form_phone").mask("+7(999) 999-9999");
+        });
+
+
+
+        $('.js-input-adress-formating').find('input').on('keyup', function (){
+            let adress = $(this).val();
+            if(adress.length > 2) {
+                let city = $('#edit_profile_form_city').val();
+
+                let query = '/clean-adress?adress=' + city + ' ' + adress;
+
+                $.get(query, function (data) {
+                    $('.js-autocomplete').html(data).show();
+                });
+            }
+        });
+        $('.js-autocomplete').on('click', 'li', function (){
+            let html = $(this).html();
+            $('.js-input-adress-formating').find('input').val(html);
+            $('.js-autocomplete').hide();
+        });
+    </script>
+
+
+    <style>
+        .autocomplete{
+            margin-left: 0;
+            padding: 0px;
+            list-style: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid grey;
+            top: 88px;
+            border-radius: 5px;
+            z-index: 9999;
+        }
+        .autocomplete li{
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .autocomplete li:hover{
+            opacity: 0.8;
+        }
+
+    </style>
+
+
+
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,68 @@
+<footer>
+    <div class="podval content">
+        <div class="top">
+            <div class="one">
+                <img class="logo" src="{{ asset('assets/img/logo.svg') }}" alt="">
+                <a href="tel:+74996477661">+7(499)647-76-61</a>
+                <div class="conf footer-link">
+                    <p><a href="{{ path('app_company') }}">О Компании</a></p>
+                    <p><a href="{{ path('app_page_politica') }}">Политика конфиденциальности</a></p>
+                    <p><a href="{{ path('app_page_personal_data') }}">Обработка персональных данных</a></p>
+                    <p><a href="{{ path('app_tarifs') }}">Тарифы</a></p>
+                </div>
+            </div>
+
+            <div class="two move footer-link">
+                <h3>Вакансии</h3>
+                <p><a href="{{ path('app_all_jobs') }}">Все вакансии</a></p>
+                <p><a href="{{ path('app_all_jobs', { category: 'nyanya'}) }}">Для нянь</a></p>
+                <p><a href="{{ path('app_all_jobs', { category: 'sidelka'}) }}">Для сиделок</a></p>
+                <p><a href="{{ path('app_all_jobs', { category: 'domrabotnica'}) }}">Для домработниц</a></p>
+                <p><a href="{{ path('app_all_jobs', { category: 'master-na-chas'}) }}">Для мастеров</a></p>
+            </div>
+
+            <div class="two footer-link">
+                <h3>Анкеты</h3>
+                <p><a href="{{ path('app_all_workers') }}">Все анкеты</a></p>
+                <p><a href="{{ path('app_all_workers', { category: 'nyanya'}) }}">Няни</a></p>
+                <p><a href="{{ path('app_all_workers', { category: 'sidelka'}) }}">Сиделки</a></p>
+                <p><a href="{{ path('app_all_workers', { category: 'domrabotnica'}) }}">Домработницы</a></p>
+                <p><a href="{{ path('app_all_workers', { category: 'master-na-chas'}) }}">Мастера на час</a></p>
+            </div>
+
+            <div class="three">
+{#                <h3>Служба поддержки</h3>#}
+                <div class="button_footer">
+                    <a id="openModal" onclick="openModal()">Написать</a>
+                </div>
+                <div class="comapny-info">
+                    <p>Общество с ограниченной ответственностью "НОУПРОБЛЕМ.РУ"</p>
+                    <p>ОГРН: 1217700461110</p>
+                    <p>ИНН: 7736337091<br />
+                        КПП: 773601001</p>
+                    <p>Юридический адрес: 119331, город Москва, пр-кт Вернадского, д. 29, эт. 5 ком./офис 20/б2у</p>
+                    <p>Генеральный директор: Горшенёва Анастасия Юрьевна</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="go">
+                <p>Присоединяйтесь к нам</p>
+                <div class="sety">
+                    <img src="{{ asset('assets/img/ant-design_instagram-filled.svg') }}" alt="">
+                    <img src="{{ asset('assets/img/akar-icons_youtube-fill.svg') }}" alt="">
+                    <img src="{{ asset('assets/img/bi_facebook.svg') }}" alt="">
+                </div>
+            </div>
+            <div class="inet">
+                <img src="{{ asset('assets/img/googleplay.svg') }}" alt="">
+                <img src="{{ asset('assets/img/appstore.svg') }}" alt="">
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% if ticketForm is defined %}
+    {% include 'partials/modal/_ticket_form.html.twig' %}
+{% endif %}

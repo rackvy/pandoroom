@@ -1,0 +1,71 @@
+<div class="regs">
+    {% if is_granted('ROLE_EMPLOYEE') or is_granted('ROLE_CUSTOMER') or is_granted('ROLE_BUYER') %}
+        {% if user is defined %}
+        {% set nts = 0 %}
+        {% if user.notifications %}
+            {% for notification in user.notifications %}
+                {% if notification.isRead == 0 %}
+                    {% set nts = nts + 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="vhod"  style="cursor:pointer">
+            <a href="{{ path('app_notifications') }}" class="notif">
+                <span>Сообщения</span>
+                <img src="{{ asset('assets/img/bi_chat.svg') }}" alt="">{% if nts > 0 %}
+                <span class="count">{{ nts }}</span>{% endif %}
+            </a>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+
+{# <div class="regs" >
+    <div class="vhod" style="cursor:pointer">
+        <a href="{{ path('app_blog') }}"><span>Блог</span></a>
+        <img src="{{ asset('assets/img/blockicon.svg') }}" alt="">
+    </div>
+</div>#}
+
+{#<div class="regs">#}
+{#    <div class="vhod" style="cursor:pointer">#}
+{#        <a href="{{ path('app_courses') }}"><span>Список курсов</span></a>#}
+{#        <img src="{{ asset('assets/img/courseicon.svg') }}" alt="">#}
+{#    </div>#}
+{#</div>#}
+
+{% if is_granted('ROLE_EMPLOYEE') %}
+    <div class="btn_worker" style="cursor: pointer;">
+        <a href="{{ path('app_all_workers') }}">Поиск работника</a>
+    </div>
+    <div class="btn_employer" style="cursor: pointer;">
+        {% if user.isActive == true %}
+            <a href="{{ path('app_new_job') }}">Создать вакансию</a>
+        {% else %}
+            <a id="openForm" onclick="openForm()">Создать вакансию</a>
+            {% include 'partials/misc/_notify_form.html.twig' %}
+        {% endif %}
+    </div>
+{% elseif is_granted('ROLE_CUSTOMER') %}
+    <div class="btn_worker _btn_employer" style="cursor: pointer;">
+        <a href="{{ path('app_all_jobs') }}">Поиск вакансии</a>
+    </div>
+    <div class="btn_employer" style="cursor: pointer;">
+        {% if user.isActive == true %}
+            <a href="{{ path('app_new_work') }}">Создать анкету</a>
+        {% else %}
+            <a id="openForm" onclick="openForm()">Создать анкету</a>
+            {% include 'partials/misc/_notify_form.html.twig' %}
+        {% endif %}
+    </div>
+{% elseif is_granted('ROLE_BUYER') %}
+    <div class="btn_worker" style="cursor: pointer;">
+        <a>Стать работником</a>
+    </div>
+    <div class="btn_employer" style="cursor: pointer;">
+        <a>Стать работодателем</a>
+    </div>
+{% else %}
+
+{% endif %}
