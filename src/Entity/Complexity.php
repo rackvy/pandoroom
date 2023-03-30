@@ -18,13 +18,6 @@ class Complexity
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'complexity', targetEntity: Quest2::class)]
-    private Collection $quest2s;
-
-    public function __construct()
-    {
-        $this->quest2s = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -47,33 +40,4 @@ class Complexity
         return $this->name;
     }
 
-    /**
-     * @return Collection<int, Quest2>
-     */
-    public function getQuest2s(): Collection
-    {
-        return $this->quest2s;
-    }
-
-    public function addQuest2(Quest2 $quest2): self
-    {
-        if (!$this->quest2s->contains($quest2)) {
-            $this->quest2s->add($quest2);
-            $quest2->setComplexity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuest2(Quest2 $quest2): self
-    {
-        if ($this->quest2s->removeElement($quest2)) {
-            // set the owning side to null (unless already changed)
-            if ($quest2->getComplexity() === $this) {
-                $quest2->setComplexity(null);
-            }
-        }
-
-        return $this;
-    }
 }

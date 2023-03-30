@@ -9,7 +9,7 @@ use App\Entity\Complexity;
 use App\Entity\Fact;
 use App\Entity\News;
 use App\Entity\PeopleCount;
-use App\Entity\Quest2;
+use App\Entity\Quest3;
 use App\Entity\Review;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -59,7 +59,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Факты', 'fas fa-solid fa-pen', Fact::class);
         yield MenuItem::linkToCrud('Новости', 'fas fa-solid fa-newspaper', News::class);
         yield MenuItem::linkToCrud('Отзывы', 'fas fa-solid fa-star', Review::class);
-        yield MenuItem::linkToCrud('Квесты', 'fas fa-solid fa-mask', Quest2::class);
+        yield MenuItem::linkToCrud('Квесты', 'fas fa-solid fa-mask', Quest3::class);
         yield MenuItem::linktoRoute('-----------', 'fas', '');
         yield MenuItem::linkToCrud('Возраст', 'fas fa-solid fa-mask', Age::class);
         yield MenuItem::linkToCrud('Жанр', 'fas fa-solid fa-mask', Category::class);

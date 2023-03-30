@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Quest;
+use App\Entity\Quest3;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Quest>
+ * @extends ServiceEntityRepository<Quest3>
  *
- * @method Quest|null find($id, $lockMode = null, $lockVersion = null)
- * @method Quest|null findOneBy(array $criteria, array $orderBy = null)
- * @method Quest[]    findAll()
- * @method Quest[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Quest3|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Quest3|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Quest3[]    findAll()
+ * @method Quest3[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class QuestRepository extends ServiceEntityRepository
+class Quest3Repository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Quest::class);
+        parent::__construct($registry, Quest3::class);
     }
 
-    public function save(Quest $entity, bool $flush = false): void
+    public function save(Quest3 $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class QuestRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Quest $entity, bool $flush = false): void
+    public function remove(Quest3 $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class QuestRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Quest[] Returns an array of Quest objects
+//     * @return Quest3[] Returns an array of Quest3 objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class QuestRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Quest
+//    public function findOneBySomeField($value): ?Quest3
 //    {
 //        return $this->createQueryBuilder('q')
 //            ->andWhere('q.exampleField = :val')
