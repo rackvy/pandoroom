@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PandoroomController extends AbstractController
 {
-    #[Route('/hello', name: 'app_pandoroom')]
+    #[Route('/', name: 'app_pandoroom')]
     public function index(Request $request): Response
     {
       dump($request);

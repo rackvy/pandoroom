@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Age;
 use App\Entity\Banner;
 use App\Entity\Category;
@@ -65,6 +66,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Жанр', 'fas fa-solid fa-mask', Category::class);
         yield MenuItem::linkToCrud('Сложность', 'fas fa-solid fa-mask', Complexity::class);
         yield MenuItem::linkToCrud('Количество участников', 'fas fa-solid fa-mask', PeopleCount::class);
+        yield MenuItem::linktoRoute('-----------', 'fas', '');
+        yield MenuItem::linkToCrud('Администраторы', 'fas fa-solid fa-user', Admin::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
