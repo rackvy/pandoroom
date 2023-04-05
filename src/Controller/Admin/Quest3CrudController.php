@@ -8,7 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -34,14 +36,14 @@ class Quest3CrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-          yield TextField::new('name');
-          yield TextareaField::new('description')->hideOnIndex();
-          yield TextField::new('picture')->hideOnIndex();
-          yield ArrayField::new('more_photos')->hideOnIndex();
-          yield AssociationField::new('age');
-          yield AssociationField::new('category');
-          yield AssociationField::new('complexity');
-          yield AssociationField::new('people_count');
+          yield TextField::new('name')->setLabel('Название квеста');
+          yield TextEditorField::new('description')->hideOnIndex()->setLabel('Описание');
+          yield ImageField::new('picture')->setUploadDir('public/uploads/')->hideOnIndex()->setLabel('Основная картинка');
+          yield ArrayField::new('more_photos')->hideOnIndex()->setLabel('Дополнительные фотографии');
+          yield AssociationField::new('age')->setLabel('Возраст');
+          yield AssociationField::new('category')->setLabel('Жанр');
+          yield AssociationField::new('complexity')->setLabel('Сложность');
+          yield AssociationField::new('people_count')->setLabel('Количество игроков');
 //        yield EmailField::new('email');
 //        yield TextareaField::new('text')
 //              ->hideOnIndex()

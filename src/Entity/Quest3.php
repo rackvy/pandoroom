@@ -22,6 +22,7 @@ use Twig\Environment;
     order: ['id' => 'DESC'],
     paginationEnabled: false,
 )]
+#[ApiFilter(SearchFilter::class, properties: ['age' => 'exact'])]
 class Quest3
 {
     #[ORM\Id]
