@@ -38,7 +38,7 @@ class Quest3CrudController extends AbstractCrudController
     {
           yield TextField::new('name')->setLabel('Название квеста');
           yield TextEditorField::new('description')->hideOnIndex()->setLabel('Описание');
-          yield ImageField::new('picture')->setUploadDir('public/uploads/')->hideOnIndex()->setLabel('Основная картинка');
+          yield ImageField::new('picture')->setUploadDir('public/uploads/')->setBasePath('/uploads')->setLabel('Основная картинка');
           yield ArrayField::new('more_photos')->hideOnIndex()->setLabel('Дополнительные фотографии');
           yield AssociationField::new('age')->setLabel('Возраст');
           yield AssociationField::new('category')->setLabel('Жанр');
