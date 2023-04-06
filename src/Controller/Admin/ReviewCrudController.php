@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -40,6 +41,16 @@ class ReviewCrudController extends AbstractCrudController
             'vl.ru' => 'vl.ru',
             'yandex' => 'yandex',
         ])->setLabel('Платформа отзыва');
+
+        yield ChoiceField::new('stars')->setChoices([
+            // $value => $badgeStyleName
+            '1' => '1',
+            '2' => '2',
+            '3' => '3',
+            '4' => '4',
+            '5' => '5',
+        ])->setLabel('Кол-во звёзд');
+
 
 //        yield EmailField::new('email');
 //        yield TextareaField::new('text')

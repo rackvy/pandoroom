@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -44,6 +45,23 @@ class Quest3CrudController extends AbstractCrudController
           yield AssociationField::new('category')->setLabel('Жанр');
           yield AssociationField::new('complexity')->setLabel('Сложность');
           yield AssociationField::new('people_count')->setLabel('Количество игроков');
+
+          yield TextField::new('mo')->hideOnIndex()->setLabel('Понедельник (10:00;11:00...)');
+          yield TextField::new('tu')->hideOnIndex()->setLabel('Вторник (10:00;11:00...)');
+          yield TextField::new('we')->hideOnIndex()->setLabel('Среда (10:00;11:00...)');
+          yield TextField::new('th')->hideOnIndex()->setLabel('Четверг (10:00;11:00...)');
+          yield TextField::new('fr')->hideOnIndex()->setLabel('Пятница (10:00;11:00...)');
+          yield TextField::new('sa')->hideOnIndex()->setLabel('Суббота (10:00;11:00...)');
+          yield TextField::new('su')->hideOnIndex()->setLabel('Воскресенье (10:00;11:00...)');
+
+          yield MoneyField::new('mo_price')->hideOnIndex()->setLabel('Цена в Понедельник')->setCurrency('RUB');
+          yield MoneyField::new('tu_price')->hideOnIndex()->setLabel('Цена в Вторник')->setCurrency('RUB');
+          yield MoneyField::new('we_price')->hideOnIndex()->setLabel('Цена в Среда')->setCurrency('RUB');
+          yield MoneyField::new('th_price')->hideOnIndex()->setLabel('Цена в Четверг')->setCurrency('RUB');
+          yield MoneyField::new('fr_price')->hideOnIndex()->setLabel('Цена в Пятница')->setCurrency('RUB');
+          yield MoneyField::new('sa_price')->hideOnIndex()->setLabel('Цена в Суббота')->setCurrency('RUB');
+          yield MoneyField::new('su_price')->hideOnIndex()->setLabel('Цена в Воскресенье')->setCurrency('RUB');
+
 //        yield EmailField::new('email');
 //        yield TextareaField::new('text')
 //              ->hideOnIndex()

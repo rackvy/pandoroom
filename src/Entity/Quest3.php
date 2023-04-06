@@ -67,6 +67,62 @@ class Quest3
     #[Groups(['quest3:list', 'quest3:item'])]
     private ?PeopleCount $people_count = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $mo = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $tu = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $we = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $th = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $fr = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $sa = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $su = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $mo_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $tu_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $we_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $th_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $fr_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $sa_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['quest3:list', 'quest3:item'])]
+    private ?string $su_price = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +220,174 @@ class Quest3
     public function setPeopleCount(?PeopleCount $people_count): self
     {
         $this->people_count = $people_count;
+
+        return $this;
+    }
+
+    public function getMo(): ?string
+    {
+        return $this->mo;
+    }
+
+    public function setMo(?string $mo): self
+    {
+        $this->mo = $mo;
+
+        return $this;
+    }
+
+    public function getTu(): ?string
+    {
+        return $this->tu;
+    }
+
+    public function setTu(?string $tu): self
+    {
+        $this->tu = $tu;
+
+        return $this;
+    }
+
+    public function getWe(): ?string
+    {
+        return $this->we;
+    }
+
+    public function setWe(?string $we): self
+    {
+        $this->we = $we;
+
+        return $this;
+    }
+
+    public function getTh(): ?string
+    {
+        return $this->th;
+    }
+
+    public function setTh(?string $th): self
+    {
+        $this->th = $th;
+
+        return $this;
+    }
+
+    public function getFr(): ?string
+    {
+        return $this->fr;
+    }
+
+    public function setFr(?string $fr): self
+    {
+        $this->fr = $fr;
+
+        return $this;
+    }
+
+    public function getSa(): ?string
+    {
+        return $this->sa;
+    }
+
+    public function setSa(?string $sa): self
+    {
+        $this->sa = $sa;
+
+        return $this;
+    }
+
+    public function getSu(): ?string
+    {
+        return $this->su;
+    }
+
+    public function setSu(?string $su): self
+    {
+        $this->su = $su;
+
+        return $this;
+    }
+
+    public function getMoPrice(): ?string
+    {
+        return $this->mo_price;
+    }
+
+    public function setMoPrice(?string $mo_price): self
+    {
+        $this->mo_price = $mo_price;
+
+        return $this;
+    }
+
+    public function getTuPrice(): ?string
+    {
+        return $this->tu_price;
+    }
+
+    public function setTuPrice(?string $tu_price): self
+    {
+        $this->tu_price = $tu_price;
+
+        return $this;
+    }
+
+    public function getWePrice(): ?string
+    {
+        return $this->we_price;
+    }
+
+    public function setWePrice(?string $we_price): self
+    {
+        $this->we_price = $we_price;
+
+        return $this;
+    }
+
+    public function getThPrice(): ?string
+    {
+        return $this->th_price;
+    }
+
+    public function setThPrice(?string $th_price): self
+    {
+        $this->th_price = $th_price;
+
+        return $this;
+    }
+
+    public function getFrPrice(): ?string
+    {
+        return $this->fr_price;
+    }
+
+    public function setFrPrice(?string $fr_price): self
+    {
+        $this->fr_price = $fr_price;
+
+        return $this;
+    }
+
+    public function getSaPrice(): ?string
+    {
+        return $this->sa_price;
+    }
+
+    public function setSaPrice(?string $sa_price): self
+    {
+        $this->sa_price = $sa_price;
+
+        return $this;
+    }
+
+    public function getSuPrice(): ?string
+    {
+        return $this->su_price;
+    }
+
+    public function setSuPrice(?string $su_price): self
+    {
+        $this->su_price = $su_price;
 
         return $this;
     }
