@@ -8,6 +8,8 @@ use App\Repository\AgeRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ComplexityRepository;
 use App\Repository\PeopleCountRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Types\Types;
@@ -122,6 +124,19 @@ class Quest3
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['quest3:list', 'quest3:item'])]
     private ?string $su_price = null;
+
+    #[ORM\OneToMany(mappedBy: 'quest', targetEntity: Order::class)]
+    private Collection $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -388,6 +403,36 @@ class Quest3
     public function setSuPrice(?string $su_price): self
     {
         $this->su_price = $su_price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setQuest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getQuest() === $this) {
+                $order->setQuest(null);
+            }
+        }
 
         return $this;
     }
